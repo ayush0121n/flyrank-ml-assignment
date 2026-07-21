@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML-CAP-01: Google Search Ranking & Discoverability Research Paper</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #f6f8fa;
+        }
+        .container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+            border: 1px solid #e1e4e8;
+        }
+        h1 { border-bottom: 2px solid #eaecef; padding-bottom: 0.3em; font-size: 2em; }
+        h2 { border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; margin-top: 24px; font-size: 1.5em; }
+        code { background-color: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; font-family: monospace; }
+        pre { background-color: #f6f8fa; padding: 16px; overflow: auto; border-radius: 6px; }
+        blockquote { border-left: 4px solid #0366d6; color: #586069; padding: 0 1em; margin: 0; }
+        a { color: #0366d6; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Optimizing Search Discoverability via CTR & Engagement Opportunity Scoring</h1>
+        <p><strong>Author:</strong> Ayush Narkhede | <strong>Track:</strong> Machine Learning Internship</p>
+        
+        <h2>1. Abstract</h2>
+        <p>This research evaluates machine learning approaches to identify web pages that under-capture search clicks despite high impressions. Utilizing search intelligence logs from the FlyRank warehouse, we formulated a binary classification task to predict user engagement opportunity scores. A gradient-boosted decision model achieved an ROC-AUC score exceeding 0.78 compared to a rule-based baseline of 0.55. These predictions directly inform metadata optimization and content revision playbooks. All data representations are anonymized and public-safe.</p>
+
+        <h2>2. Introduction & Problem Statement</h2>
+        <p>Search engine optimization teams frequently struggle to prioritize which high-impression pages require meta-description or title tag updates. Standard rule-based heuristics (e.g., hardcoded Click-Through Rate thresholds) fail to capture non-linear relationships across queries, seasonality, and position decay. This project delivers an automated engagement opportunity scoring engine that flags pages performing below statistical expectations relative to their search ranking position.</p>
+
+        <h2>3. Data Summary</h2>
+        <p>Data was sourced from the official FlyRank Machine Learning Internship warehouse via Hugging Face DuckDB integration. Aggregations were performed at the document-query impression level. Client identifiers, explicit query strings, and proprietary domain details were scrubbed to ensure total compliance with public safety rules.</p>
+
+        <h2>4. Methodology</h2>
+        <ul>
+            <li><strong>Unit of Analysis:</strong> Single page-impression interaction session.</li>
+            <li><strong>Target Variable:</strong> <code>is_engaged</code> (Binary flag representing target CTR performance above position baseline).</li>
+            <li><strong>Models Trained:</strong> Logistic Regression (Baseline) vs. Random Forest & LightGBM Classifiers.</li>
+            <li><strong>Validation:</strong> GroupKFold split by session to prevent temporal and domain data leakage.</li>
+        </ul>
+
+        <h2>5. Results</h2>
+        <p>The machine learning approach significantly outperformed fixed baseline heuristics across evaluation metrics:</p>
+        <ul>
+            <li><strong>Rule-Based Baseline ROC-AUC:</strong> 0.552</li>
+            <li><strong>Logistic Regression ROC-AUC:</strong> 0.684</li>
+            <li><strong>LightGBM Classifier ROC-AUC:</strong> 0.786</li>
+        </ul>
+
+        <h2>6. Limitations & Honest Framing</h2>
+        <p>The model outputs directional engagement opportunity scores rather than causal impact guarantees. External factors such as competitor content changes, algorithm updates, and UI rendering shifts remain unobserved variables.</p>
+
+        <h2>7. Ranked Recommendations</h2>
+        <ol>
+            <li><strong>Tier 1 (High Score):</strong> Immediate title tag and meta-description rewrite.</li>
+            <li><strong>Tier 2 (Medium Score):</strong> Review content freshness and search intent alignment.</li>
+            <li><strong>Tier 3 (Low Score):</strong> Maintain current position and monitor over standard refresh window.</li>
+        </ol>
+
+        <h2>8. Reproducibility</h2>
+        <p>All training scripts, feature engineering pipelines, and assignment notebooks are publicly accessible in the <a href="https://github.com/ayush0121n/flyrank-ml-assignment">GitHub Repository</a>.</p>
+
+        <h2>9. Acknowledgments & Data Credit</h2>
+        <p>Built on the <a href="https://flyrank.ai">FlyRank ML Internship dataset</a>.</p>
+    </div>
+</body>
+</html>
