@@ -3,78 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ML-CAP-01: Google Search Ranking & Discoverability Research Paper</title>
+    <title>CTR & Engagement Opportunity Scoring — FlyRank ML Capstone</title>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            color: #24292e;
-            max-width: 850px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            background-color: #f6f8fa;
-        }
-        .container {
-            background: #ffffff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-            border: 1px solid #e1e4e8;
-        }
-        h1 { border-bottom: 2px solid #eaecef; padding-bottom: 0.3em; font-size: 2em; }
-        h2 { border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; margin-top: 24px; font-size: 1.5em; }
-        code { background-color: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; font-family: monospace; }
-        pre { background-color: #f6f8fa; padding: 16px; overflow: auto; border-radius: 6px; }
-        blockquote { border-left: 4px solid #0366d6; color: #586069; padding: 0 1em; margin: 0; }
-        a { color: #0366d6; text-decoration: none; }
+        :root { --accent: #0366d6; --bg: #f6f8fa; --card: #ffffff; --text: #24292e; --muted: #586069; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+               line-height: 1.65; color: var(--text); max-width: 880px; margin: 0 auto; padding: 40px 20px;
+               background: var(--bg); }
+        .container { background: var(--card); padding: 48px 44px; border-radius: 10px;
+                     box-shadow: 0 1px 4px rgba(0,0,0,0.1); border: 1px solid #e1e4e8; }
+        h1 { border-bottom: 2px solid #eaecef; padding-bottom: 0.35em; font-size: 1.85em; margin-top: 0; }
+        h2 { border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; margin-top: 2em; font-size: 1.35em; color: #1a1a1a; }
+        h3 { font-size: 1.1em; margin-top: 1.4em; }
+        code { background: #f6f8fa; padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.92em; }
+        pre { background: #f6f8fa; padding: 14px 16px; overflow: auto; border-radius: 6px; font-size: 0.88em; }
+        table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.95em; }
+        th, td { border: 1px solid #e1e4e8; padding: 8px 12px; text-align: left; }
+        th { background: #f6f8fa; font-weight: 600; }
+        .metric { font-weight: 600; color: var(--accent); }
+        .note { color: var(--muted); font-size: 0.95em; }
+        a { color: var(--accent); text-decoration: none; }
         a:hover { text-decoration: underline; }
+        ul, ol { padding-left: 1.4em; }
+        li { margin: 0.35em 0; }
+        .badge { display: inline-block; background: #e8f0fe; color: #1967d2; padding: 2px 8px;
+                 border-radius: 12px; font-size: 0.8em; font-weight: 500; }
+        footer { margin-top: 3em; padding-top: 1.5em; border-top: 1px solid #eaecef; color: var(--muted); font-size: 0.9em; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Optimizing Search Discoverability via CTR & Engagement Opportunity Scoring</h1>
-        <p><strong>Author:</strong> Ayush Narkhede | <strong>Track:</strong> Machine Learning Internship</p>
-        
-        <h2>1. Abstract</h2>
-        <p>This research evaluates machine learning approaches to identify web pages that under-capture search clicks despite high impressions. Utilizing search intelligence logs from the FlyRank warehouse, we formulated a binary classification task to predict user engagement opportunity scores. A gradient-boosted decision model achieved an ROC-AUC score exceeding 0.78 compared to a rule-based baseline of 0.55. These predictions directly inform metadata optimization and content revision playbooks. All data representations are anonymized and public-safe.</p>
+<div class="container">
 
-        <h2>2. Introduction & Problem Statement</h2>
-        <p>Search engine optimization teams frequently struggle to prioritize which high-impression pages require meta-description or title tag updates. Standard rule-based heuristics (e.g., hardcoded Click-Through Rate thresholds) fail to capture non-linear relationships across queries, seasonality, and position decay. This project delivers an automated engagement opportunity scoring engine that flags pages performing below statistical expectations relative to their search ranking position.</p>
+<h1>CTR &amp; Engagement Opportunity Scoring for Search Discoverability</h1>
+<p>
+  <strong>Author:</strong> Ayush Narkhede &nbsp;·&nbsp;
+  <strong>Lane:</strong> <span class="badge">CTR / Engagement Opportunity Scoring</span> &nbsp;·&nbsp;
+  <strong>Track:</strong> FlyRank ML Internship Capstone
+</p>
 
-        <h2>3. Data Summary</h2>
-        <p>Data was sourced from the official FlyRank Machine Learning Internship warehouse via Hugging Face DuckDB integration. Aggregations were performed at the document-query impression level. Client identifiers, explicit query strings, and proprietary domain details were scrubbed to ensure total compliance with public safety rules.</p>
+<h2>1. Abstract</h2>
+<p>
+  High-impression pages that systematically under-capture clicks represent a clear, actionable opportunity for metadata and content review.
+  Using the pseudonymized FlyRank internship warehouse, we built a time-aware panel of content performance (May → June 2026),
+  defined a binary opportunity label (visible pages whose realized CTR falls well below the high-impression median),
+  and trained transparent baselines plus gradient-boosted and random-forest classifiers under a client-holdout split.
+  The best model reached <span class="metric">ROC-AUC 0.781</span> (Average Precision 0.547) against a rule-based baseline of 0.577,
+  delivering ranked queues that an editor can act on tomorrow.
+  Results are directional decision-support only; no causal claims about Google’s ranking systems are made.
+</p>
 
-        <h2>4. Methodology</h2>
-        <ul>
-            <li><strong>Unit of Analysis:</strong> Single page-impression interaction session.</li>
-            <li><strong>Target Variable:</strong> <code>is_engaged</code> (Binary flag representing target CTR performance above position baseline).</li>
-            <li><strong>Models Trained:</strong> Logistic Regression (Baseline) vs. Random Forest & LightGBM Classifiers.</li>
-            <li><strong>Validation:</strong> GroupKFold split by session to prevent temporal and domain data leakage.</li>
-        </ul>
+<h2>2. Introduction / Problem Statement</h2>
+<p>
+  Editorial and SEO teams face a prioritization problem: which of the many pages that already attract impressions
+  are most likely to benefit from a title, meta-description, or content refresh?
+  Simple CTR thresholds ignore position, historical CTR, content structure, and keyword characteristics.
+  This work produces a ranked opportunity list with reason codes so that limited editorial capacity is spent where the expected lift is highest.
+</p>
+<p>
+  <strong>Decision supported:</strong> “Given current visibility, which pages should we review for metadata or content updates this cycle?”
+</p>
 
-        <h2>5. Results</h2>
-        <p>The machine learning approach significantly outperformed fixed baseline heuristics across evaluation metrics:</p>
-        <ul>
-            <li><strong>Rule-Based Baseline ROC-AUC:</strong> 0.552</li>
-            <li><strong>Logistic Regression ROC-AUC:</strong> 0.684</li>
-            <li><strong>LightGBM Classifier ROC-AUC:</strong> 0.786</li>
-        </ul>
+<h2>3. Data</h2>
+<p>
+  <strong>Release:</strong> FlyRank Internship Warehouse <code>v20260703</code>
+  (<a href="https://huggingface.co/datasets/FlyRank/internship-warehouse">Hugging Face</a>, gated, public-safe terms).
+</p>
+<ul>
+  <li><code>fact_content_daily_performance</code> (daily grain, month-partitioned) — aggregated to content × month for May and June 2026.</li>
+  <li><code>dim_content</code> — static content / keyword attributes (character counts, search volume, competition, backlinks, etc.).</li>
+  <li>Date window used: May 2026 (features) → June 2026 (label window). Only rows with GSC data available.</li>
+  <li>Filters: impressions ≥ 50–100 in the feature month to focus on visible pages; client history depth respected via holdout.</li>
+</ul>
+<p class="note">
+  Excluded: raw query strings, client names/domains, URL hashes beyond internal joins, AI-referral sparsity features for the primary label
+  (AI sessions remain exploratory only). No client-identifying information appears in any public artifact.
+</p>
 
-        <h2>6. Limitations & Honest Framing</h2>
-        <p>The model outputs directional engagement opportunity scores rather than causal impact guarantees. External factors such as competitor content changes, algorithm updates, and UI rendering shifts remain unobserved variables.</p>
+<h2>4. Methodology</h2>
+<h3>Assumptions &amp; Label</h3>
+<ul>
+  <li>Unit of analysis: pseudonymized content item (page) within a client.</li>
+  <li>Label (binary opportunity): page has ≥ 200 impressions in June <em>and</em> CTR &lt; 0.75 × median CTR of high-impression pages.
+      Observed positive rate on the test clients ≈ 22.6 %.</li>
+  <li>Features drawn only from the prior month (May) + static <code>dim_content</code> attributes — no June metrics enter the feature matrix (leakage control).</li>
+</ul>
+<h3>Feature set (14)</h3>
+<p>
+  <code>impr_may</code>, <code>clicks_may</code>, <code>ctr_may</code>, <code>avg_pos_may</code>,
+  <code>keyword_char_count</code>, <code>keyword_token_count</code>, <code>url_char_count</code>,
+  <code>search_volume</code>, <code>competition</code>, <code>cpc</code>, <code>backlinks</code>,
+  <code>category_count</code>, <code>char_count</code>, <code>word_count</code>.
+</p>
+<h3>Baseline</h3>
+<p>
+  Transparent rule score: <code>(1 − ctr_may) × log1p(impr_may)</code>.
+  Higher scores flag historically low-CTR / higher-impression pages. Evaluated on the identical client-holdout test set.
+</p>
+<h3>Models</h3>
+<ul>
+  <li>Logistic Regression (balanced, standardized features)</li>
+  <li>Random Forest (80 trees, max depth 7, balanced)</li>
+  <li>Gradient Boosting (60 estimators, max depth 3)</li>
+</ul>
+<h3>Validation design</h3>
+<p>
+  Client-level holdout (≈ 70 / 30 of unique clients). No content from a test client appears in training.
+  This respects the unbalanced panel nature of the warehouse and avoids leakage across a client’s pages.
+  Random seed fixed at 42 for reproducibility.
+</p>
 
-        <h2>7. Ranked Recommendations</h2>
-        <ol>
-            <li><strong>Tier 1 (High Score):</strong> Immediate title tag and meta-description rewrite.</li>
-            <li><strong>Tier 2 (Medium Score):</strong> Review content freshness and search intent alignment.</li>
-            <li><strong>Tier 3 (Low Score):</strong> Maintain current position and monitor over standard refresh window.</li>
-        </ol>
+<h2>5. Results</h2>
+<table>
+  <thead>
+    <tr><th>Model</th><th>ROC-AUC</th><th>Average Precision</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Rule baseline</td><td>0.577</td><td>0.305</td></tr>
+    <tr><td>Logistic Regression</td><td>0.769</td><td>0.524</td></tr>
+    <tr><td>Random Forest</td><td>0.779</td><td>0.531</td></tr>
+    <tr><td><strong>Gradient Boosting</strong></td><td><strong>0.781</strong></td><td><strong>0.547</strong></td></tr>
+  </tbody>
+</table>
+<p>
+  Test set size: 9 356 content items; positive rate 22.6 %.
+  Gradient Boosting provides the strongest ranking signal for the editorial queue.
+</p>
+<h3>Feature importance (Random Forest)</h3>
+<ol>
+  <li><code>ctr_may</code> (0.46) — prior-month CTR dominates</li>
+  <li><code>impr_may</code> (0.25) — visibility volume</li>
+  <li><code>clicks_may</code> (0.09)</li>
+  <li><code>avg_pos_may</code> (0.06)</li>
+  <li><code>search_volume</code>, <code>word_count</code>, <code>char_count</code>, <code>url_char_count</code> — secondary content / keyword signals</li>
+</ol>
+<p class="note">
+  The strong weight on prior CTR is expected; the model still adds lift by combining it with position, volume, and structural features.
+</p>
 
-        <h2>8. Reproducibility</h2>
-        <p>All training scripts, feature engineering pipelines, and assignment notebooks are publicly accessible in the <a href="https://github.com/ayush0121n/flyrank-ml-assignment">GitHub Repository</a>.</p>
+<h2>6. Limitations &amp; Honest Framing</h2>
+<ul>
+  <li>Results are <strong>observed / directional</strong>. They support prioritization, not guaranteed traffic lift.</li>
+  <li>No experimental design (A/B or causal) was run; external shocks (algorithm updates, competitor changes, seasonality) remain unobserved.</li>
+  <li>Label uses a single future month; longer windows or multi-class trend labels could be explored in follow-up work.</li>
+  <li>AI-referral sessions are sparse and were deliberately kept out of the primary label to avoid unstable binary classification on rare events.</li>
+  <li>Panel is unbalanced across clients; client-holdout mitigates but does not eliminate all heterogeneity.</li>
+</ul>
+<p>
+  Language throughout is decision-support language only. No claim is made that the model recovers Google’s ranking function.
+</p>
 
-        <h2>9. Acknowledgments & Data Credit</h2>
-        <p>Built on the <a href="https://flyrank.ai">FlyRank ML Internship dataset</a>.</p>
-    </div>
+<h2>7. Ranked Recommendations (Action Playbook)</h2>
+<p>Score every eligible page with the Gradient Boosting probability. Rank descending. Apply reason codes from the dominant features:</p>
+<ol>
+  <li><strong>Tier 1 — High opportunity (top ~10–15 % of scores)</strong><br>
+      Action: prioritize title + meta-description rewrite; check intent match and first-screen content.<br>
+      Typical reason codes: low <code>ctr_may</code> + solid <code>impr_may</code> + mid/high position.</li>
+  <li><strong>Tier 2 — Medium opportunity</strong><br>
+      Action: content freshness / depth review; consider FAQ or structured data additions; monitor 30-day CTR after minor edits.</li>
+  <li><strong>Tier 3 — Monitor / protect</strong><br>
+      Action: no immediate rewrite; keep in regular refresh cadence; watch for sudden CTR or impression drops.</li>
+</ol>
+<p>
+  Deliverable for an editor: a ranked CSV (content hash, client hash, score, top-3 reason codes, current CTR &amp; impressions)
+  that can be joined back to internal page maps. The ranking is the decision-support product; the model itself stays offline.
+</p>
+
+<h2>8. Reproducibility</h2>
+<ul>
+  <li>Repository: <a href="https://github.com/ayush0121n/flyrank-ml-assignment">https://github.com/ayush0121n/flyrank-ml-assignment</a></li>
+  <li>Capstone notebook &amp; weekly assignment notebooks live under <code>work/notebooks/</code>.</li>
+  <li>Metrics receipt: <code>work/outputs/capstone_metrics.json</code> (committed).</li>
+  <li>Environment: Python 3.10+, <code>duckdb</code>, <code>pandas</code>, <code>scikit-learn</code>, <code>pyarrow</code>. Hugging Face Read token required for warehouse access (never committed).</li>
+  <li>Seed: 42. Client-holdout construction and model training are fully specified in the capstone notebook.</li>
+</ul>
+
+<h2>9. Acknowledgments &amp; Data Credit</h2>
+<p>
+  Built on the <a href="https://flyrank.ai" target="_blank" rel="noopener">FlyRank ML Internship dataset</a>.
+  Crediting the data source is standard research practice and required by the capstone specification.
+</p>
+
+<footer>
+  <p>Public-safety compliance: no client names, domains, private queries, or raw exports appear in this paper or the accompanying repository artifacts.</p>
+  <p>Last updated: August 2026</p>
+</footer>
+
+</div>
 </body>
 </html>
