@@ -3,58 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ayush Narkhede — AI/ML Engineer & Full-Stack Developer</title>
-  <meta name="description" content="Ayush Narkhede — Oracle-certified AI/ML Engineer, MCA candidate. FlyRank ML Intern. Portfolio, projects, and contact." />
+  <title>Ayush Narkhede — AI/ML Engineer</title>
+  <meta name="description" content="Ayush Narkhede builds applied ML on real search data and full-stack AI products. FlyRank ML Intern. Portfolio, projects, contact." />
   <style>
     :root {
-      --bg: #0b0d10;
-      --card: #14171c;
-      --text: #e8eaed;
-      --muted: #9aa0a6;
-      --accent: #8ab4f8;
-      --orange: #ff6a00;
-      --border: #2a2f3a;
-      --ok: #81c995;
+      --bg: #0b0d10; --card: #14171c; --text: #e8eaed; --muted: #9aa0a6;
+      --accent: #8ab4f8; --orange: #ff6a00; --border: #2a2f3a;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg); color: var(--text); line-height: 1.65;
-      min-height: 100vh;
+      background: var(--bg); color: var(--text); line-height: 1.65; min-height: 100vh;
     }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 64px; }
-    header {
-      padding: 40px 0 28px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 28px;
+    .wrap { max-width: 680px; margin: 0 auto; padding: 0 20px 64px; }
+    header { padding: 36px 0 24px; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
+    .brand { font-size: 0.75rem; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; margin-bottom: 10px; }
+    h1 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .proof {
+      font-size: 1.15rem; font-weight: 500; color: var(--text); margin-bottom: 10px; line-height: 1.45;
     }
-    .brand { font-size: 0.8rem; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; margin-bottom: 10px; }
-    h1 { font-size: 1.85rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
-    .tagline { color: var(--muted); font-size: 1.05rem; margin-bottom: 16px; }
+    .sub { color: var(--muted); font-size: 0.95rem; margin-bottom: 14px; }
     .meta { font-size: 0.9rem; color: var(--muted); }
     .meta a { margin-right: 12px; }
-    nav {
-      display: flex; flex-wrap: wrap; gap: 8px 14px;
-      margin: 20px 0 0; font-size: 0.9rem;
-    }
-    nav a {
-      color: var(--text); padding: 6px 0; border-bottom: 2px solid transparent;
-    }
+    nav { display: flex; flex-wrap: wrap; gap: 8px 14px; margin: 18px 0 0; font-size: 0.9rem; }
+    nav a { color: var(--text); padding: 6px 0; border-bottom: 2px solid transparent; }
     nav a:hover { border-color: var(--orange); text-decoration: none; color: var(--orange); }
-    section { margin-bottom: 32px; }
+    section { margin-bottom: 28px; }
     h2 {
-      font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em;
-      color: var(--muted); margin-bottom: 14px; padding-bottom: 6px;
-      border-bottom: 1px solid var(--border);
+      font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--muted); margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid var(--border);
     }
     .card {
       background: var(--card); border: 1px solid var(--border);
       border-radius: 12px; padding: 18px 20px; margin-bottom: 12px;
     }
-    .card h3 { font-size: 1.05rem; margin-bottom: 4px; }
+    .card h3 { font-size: 1.02rem; margin-bottom: 4px; }
     .card .when { font-size: 0.85rem; color: var(--muted); margin-bottom: 8px; }
     .card p, .card li { font-size: 0.95rem; color: #c8ccd0; }
     .card ul { padding-left: 1.15em; margin-top: 6px; }
@@ -62,152 +48,133 @@
     .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
     .chip {
       display: inline-block; padding: 5px 11px; border-radius: 999px;
-      border: 1px solid var(--border); background: #0f1218;
-      font-size: 0.82rem; color: var(--muted);
+      border: 1px solid var(--border); background: #0f1218; font-size: 0.82rem; color: var(--muted);
     }
     .links-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
     .btn {
-      display: inline-block; padding: 10px 16px; border-radius: 8px;
-      border: 1px solid var(--border); background: #12151c;
-      color: var(--text); font-size: 0.9rem; font-weight: 500;
+      display: inline-flex; align-items: center; padding: 10px 16px; border-radius: 8px;
+      border: 1px solid var(--border); background: #12151c; color: var(--text);
+      font-size: 0.9rem; font-weight: 500; min-height: 44px;
     }
     .btn:hover { border-color: var(--accent); text-decoration: none; }
     .btn-primary { background: var(--orange); border-color: var(--orange); color: #111; font-weight: 600; }
     .btn-primary:hover { opacity: 0.92; }
+    .proof-block {
+      border-left: 3px solid var(--orange); padding-left: 14px; margin: 12px 0 4px;
+      font-size: 0.95rem; color: #d0d4d8;
+    }
     footer {
-      margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border);
+      margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--border);
       font-size: 0.85rem; color: var(--muted); text-align: center;
     }
     @media (max-width: 480px) {
-      header { padding: 28px 0 20px; }
-      h1 { font-size: 1.55rem; }
+      header { padding: 24px 0 18px; }
+      h1 { font-size: 1.45rem; }
+      .proof { font-size: 1.05rem; }
       .wrap { padding: 0 16px 48px; }
       .card { padding: 16px; }
-      .btn { min-height: 44px; display: inline-flex; align-items: center; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <div class="brand">AyushDevX · Portfolio</div>
-      <h1>Ayush Gajanan Narkhede</h1>
-      <p class="tagline">AI/ML Engineer &amp; Full-Stack Developer · MCA (AI) · FlyRank ML Intern</p>
+      <div class="brand">AyushDevX</div>
+      <h1>Ayush Narkhede</h1>
+      <!-- PROOF STATEMENT: the one job this page exists to prove -->
+      <p class="proof">I build applied machine learning on real search data — and ship the full-stack systems around it.</p>
+      <p class="sub">FlyRank ML Intern · MCA (AI), CGPA 8.58 · Oracle-certified AI foundations</p>
       <p class="meta">
-        <a href="mailto:ayushnarkhede0121@gmail.com">ayushnarkhede0121@gmail.com</a>
+        <a href="mailto:ayushnarkhede0121@gmail.com">Email</a>
         <a href="https://www.linkedin.com/in/ayush-narkhede-946638345" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://github.com/ayush0121n" target="_blank" rel="noopener">GitHub</a>
-        
       </p>
       <nav>
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
+        <a href="#proof">Proof</a>
+        <a href="#work">Work</a>
         <a href="#projects">Projects</a>
-        <a href="#flyrank">FlyRank Work</a>
         <a href="#skills">Skills</a>
         <a href="contact.html">Contact</a>
       </nav>
     </header>
 
-    <section id="about">
-      <h2>About</h2>
+    <section id="proof">
+      <h2>What I do (and the proof)</h2>
       <div class="card">
-        <p>
-          Versatile Software &amp; AI Engineer with foundations in full-stack development, machine learning, and data science.
-          I build end-to-end applications, RAG-style pipelines, and decision-support models on real search data.
-          Currently MCA (Artificial Intelligence) at Sri Balaji University (CGPA 8.58) and Machine Learning Intern at FlyRank AI.
+        <p class="proof-block">
+          On FlyRank’s search warehouse I ranked pages by CTR opportunity at <strong>ROC-AUC 0.781</strong>
+          (client-holdout, base rate 22.6%) vs a rule baseline of 0.577 — a decision-support queue for editors, not a causal claim.
+        </p>
+        <p style="margin-top:12px">
+          I also shipped <strong>DevTriage AI</strong>: a working agent that pulls GitHub notifications, classifies them, and drafts replies without sending anything on its own.
         </p>
         <div class="links-row">
           <a class="btn btn-primary" href="contact.html">Contact / Hire me</a>
-          <a class="btn" href="https://ayushdevxx.vercel.app/" target="_blank" rel="noopener">Main portfolio site</a>
-          <a class="btn" href="https://github.com/ayush0121n/flyrank-ml-assignment" target="_blank" rel="noopener">This repo</a>
+          <a class="btn" href="submission/">Read the research paper</a>
+          <a class="btn" href="https://github.com/ayush0121n/flyrank-ml-assignment" target="_blank" rel="noopener">Open the repo</a>
         </div>
       </div>
     </section>
 
-    <section id="experience">
+    <section id="work">
       <h2>Experience</h2>
       <div class="card">
         <h3>Machine Learning Engineering Intern — FlyRank AI</h3>
         <p class="when">July 2026 – Sept 2026 · Remote</p>
         <ul>
-          <li>Built CTR / engagement opportunity scoring on the FlyRank warehouse (client-holdout GB AUC 0.781).</li>
-          <li>Shipped DevTriage AI agent with live GitHub API tool + safety-gated drafts.</li>
-          <li>Wrote public research paper and validation audit with leakage checks and honest claim language.</li>
+          <li>CTR / engagement opportunity scoring on the full warehouse; client-holdout validation; public research paper.</li>
+          <li>DevTriage AI agent with live GitHub API tool, offline fallback, and safety-gated drafts.</li>
+          <li>Validation audit: leakage checks, failure modes, claim rewrite in observed / decision-support language.</li>
         </ul>
+        <div class="links-row">
+          <a class="btn" href="submission/">Live paper</a>
+          <a class="btn" href="https://github.com/ayush0121n/flyrank-ml-assignment/tree/main/personal_agent" target="_blank" rel="noopener">Agent</a>
+          <a class="btn" href="https://github.com/ayush0121n/flyrank-ml-assignment/blob/main/work/notebooks/w06_validation_audit.ipynb" target="_blank" rel="noopener">Audit notebook</a>
+        </div>
       </div>
       <div class="card">
         <h3>AI Research Intern — YuvaIntern</h3>
         <p class="when">April 2026 – June 2026 · Remote</p>
         <ul>
-          <li>Applied ML workflows: preprocessing, training, evaluation; delivered a capstone analysis project.</li>
+          <li>ML workflows end to end: preprocessing, training, evaluation; delivered a capstone analysis project.</li>
         </ul>
       </div>
     </section>
 
     <section id="projects">
-      <h2>Selected Projects</h2>
+      <h2>Selected projects</h2>
       <div class="card">
-        <h3>MalariaScope — Medical Image Classifier</h3>
+        <h3>MalariaScope — Medical image classifier</h3>
         <p class="when">2025 · Python, TensorFlow, Flask, CNN</p>
-        <p>CNN (EfficientNetB0) on 27k+ images, ~93% accuracy; Flask API with sub-3s inference and diagnostic reports.</p>
+        <p>EfficientNetB0 on 27k+ images (~93% accuracy); Flask API with sub-3s inference and diagnostic reports.</p>
+        <div class="links-row">
+          <a class="btn" href="https://github.com/ayush0121n" target="_blank" rel="noopener">GitHub profile</a>
+        </div>
       </div>
       <div class="card">
-        <h3>EstateXAI — Real Estate Web App</h3>
+        <h3>EstateXAI — Real estate web app</h3>
         <p class="when">2025 · MERN, JWT, MongoDB</p>
-        <p>Full-stack app with role-based auth, 9 REST endpoints, AI recommendations, geospatial aggregation queries.</p>
+        <p>Role-based auth, 9 REST endpoints, AI recommendations, geospatial aggregation queries.</p>
       </div>
       <div class="card">
-        <h3>ProConnect — Professional Networking</h3>
+        <h3>ProConnect — Professional networking</h3>
         <p class="when">2025 · React, TypeScript, Socket.IO, MongoDB</p>
         <p>Real-time messaging, JWT auth, multi-tier access; 20+ reusable components, mobile-responsive UI.</p>
       </div>
     </section>
 
-    <section id="flyrank">
-      <h2>FlyRank Internship Deliverables</h2>
-      <div class="card">
-        <h3>Capstone — CTR &amp; Engagement Opportunity Scoring</h3>
-        <p class="when">Research paper · client-holdout validation · decision-support rankings</p>
-        <div class="links-row">
-          <a class="btn" href="submission/" target="_blank" rel="noopener">Live paper</a>
-          <a class="btn" href="https://github.com/ayush0121n/flyrank-ml-assignment/blob/main/work/outputs/capstone_metrics.json" target="_blank" rel="noopener">Metrics</a>
-          <a class="btn" href="https://github.com/ayush0121n/flyrank-ml-assignment/blob/main/work/notebooks/w06_validation_audit.ipynb" target="_blank" rel="noopener">Validation audit</a>
-        </div>
-      </div>
-      <div class="card">
-        <h3>DevTriage AI — Personal Agent (FL-07)</h3>
-        <p class="when">GitHub notifications → classify → draft replies → triage_digest.md</p>
-        <div class="links-row">
-          <a class="btn" href="https://github.com/ayush0121n/flyrank-ml-assignment/tree/main/personal_agent" target="_blank" rel="noopener">Agent code</a>
-          <a class="btn" href="https://github.com/ayush0121n/flyrank-ml-assignment/blob/main/personal_agent/build_log.md" target="_blank" rel="noopener">Build log</a>
-          <a class="btn" href="https://github.com/ayush0121n/flyrank-ml-assignment/blob/main/personal_agent/demo/fl07_agent_run_capture.mp4" target="_blank" rel="noopener">Run capture</a>
-        </div>
-      </div>
-      <div class="card">
-        <h3>Contact form · Mobile polish · DNS</h3>
-        <div class="links-row">
-          <a class="btn btn-primary" href="contact.html">Working contact form</a>
-          <a class="btn" href="https://github.com/ayush0121n/flyrank-ml-assignment/blob/main/docs/mobile-fix-log.md" target="_blank" rel="noopener">Mobile fix log</a>
-          <a class="btn" href="https://github.com/ayush0121n/flyrank-ml-assignment/blob/main/docs/dns-walkthrough.pdf" target="_blank" rel="noopener">DNS walkthrough</a>
-          <a class="btn" href="https://github.com/ayush0121n/flyrank-ml-assignment/blob/main/docs/make-it-do-something-explainer.pdf" target="_blank" rel="noopener">Form explainer</a>
-        </div>
-      </div>
-    </section>
-
     <section id="skills">
-      <h2>Skills &amp; Certifications</h2>
+      <h2>Skills &amp; certifications</h2>
       <div class="card">
         <div class="chips">
-          <span class="chip">Python</span><span class="chip">Java</span><span class="chip">TypeScript</span>
-          <span class="chip">TensorFlow</span><span class="chip">Scikit-Learn</span><span class="chip">Pandas</span>
-          <span class="chip">React</span><span class="chip">Node.js</span><span class="chip">FastAPI</span>
-          <span class="chip">MongoDB</span><span class="chip">MySQL</span><span class="chip">RAG / LLMs</span>
-          <span class="chip">Git</span><span class="chip">Vercel</span><span class="chip">OCI</span>
+          <span class="chip">Python</span><span class="chip">Scikit-Learn</span><span class="chip">TensorFlow</span>
+          <span class="chip">Pandas</span><span class="chip">React</span><span class="chip">Node.js</span>
+          <span class="chip">FastAPI</span><span class="chip">TypeScript</span><span class="chip">MongoDB</span>
+          <span class="chip">RAG / LLMs</span><span class="chip">Git</span><span class="chip">Vercel</span>
         </div>
         <p style="margin-top:14px;font-size:0.9rem;color:var(--muted)">
-          Oracle: Agentic AI Foundations Associate · OCI AI &amp; Data Science Professional<br />
-          Infosys Springboard Full Stack Java · HackerRank Software Engineer · IBM SkillsBuild AI (92/100)
+          Oracle Agentic AI Foundations Associate · OCI AI &amp; Data Science Professional<br />
+          Infosys Full Stack Java · HackerRank Software Engineer · IBM SkillsBuild AI (92/100)
         </p>
       </div>
     </section>
@@ -215,18 +182,18 @@
     <section id="contact">
       <h2>Contact</h2>
       <div class="card">
-        <p>One message reaches my inbox. Free-tier form backend (Web3Forms).</p>
+        <p>One form. A real message reaches my inbox.</p>
         <div class="links-row">
-          <a class="btn btn-primary" href="contact.html">Open contact form</a>
-          <a class="btn" href="mailto:ayushnarkhede0121@gmail.com">Email directly</a>
+          <a class="btn btn-primary" href="contact.html">Send a message</a>
+          <a class="btn" href="mailto:ayushnarkhede0121@gmail.com">Email</a>
         </div>
       </div>
     </section>
 
     <footer>
-      Hosted on GitHub Pages · HTTPS ·
-      <a href="https://github.com/ayush0121n/flyrank-ml-assignment">Source repo</a><br />
-      FlyRank completion badge will be added when the capstone is approved.
+      GitHub Pages · HTTPS ·
+      <a href="https://github.com/ayush0121n/flyrank-ml-assignment">Source</a>
+      · FlyRank badge added when the capstone is approved
     </footer>
   </div>
 </body>
