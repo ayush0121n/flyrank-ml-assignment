@@ -45,11 +45,11 @@
         HOW TO ACTIVATE (2 minutes):
         1. Go to https://web3forms.com  (or formspree.io)
         2. Enter your email → copy the Access Key
-        3. Replace YOUR_ACCESS_KEY_HERE below with that key
+        3. Replace 2e609fac-4eb2-49e9-9948-9eb6b837f981 below with that key
         4. Push / redeploy — then submit a real test from this page
       -->
       <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+        <input type="hidden" name="access_key" value="2e609fac-4eb2-49e9-9948-9eb6b837f981" />
         <input type="hidden" name="subject" value="Portfolio contact — ayushdevxx" />
         <input type="checkbox" name="botcheck" style="display:none" />
 
@@ -81,9 +81,9 @@
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       const key = form.querySelector('[name="access_key"]').value;
-      if (!key || key === "YOUR_ACCESS_KEY_HERE") {
+      if (!key || key === "2e609fac-4eb2-49e9-9948-9eb6b837f981") {
         msg.className = "msg err";
-        msg.textContent = "Form not activated yet — replace YOUR_ACCESS_KEY_HERE with your free Web3Forms key (see page source comment).";
+        msg.textContent = "Form not activated yet — replace 2e609fac-4eb2-49e9-9948-9eb6b837f981 with your free Web3Forms key (see page source comment).";
         return;
       }
       btn.disabled = true;
