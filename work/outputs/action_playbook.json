@@ -1,0 +1,31 @@
+{
+  "lane": "CTR / Engagement Opportunity Scoring",
+  "model": "GradientBoosting",
+  "metrics": {
+    "gb_auc": 0.7811166440272592,
+    "baseline_auc": 0.5765846540089778,
+    "label_rate_test": 0.22595126122274475
+  },
+  "tiers": {
+    "1": "Prioritize title + meta rewrite",
+    "2": "Content freshness / depth review",
+    "3": "Monitor / protect"
+  },
+  "reason_code_vocab": [
+    "LOW_CTR_MAY",
+    "SOLID_IMPR_MAY",
+    "HIGH_IMPR_MAY",
+    "MID_POS",
+    "AVG_POS_HIGH",
+    "MOD_CTR",
+    "THIN_CONTENT",
+    "STABLE_CTR",
+    "LOW_VOLUME"
+  ],
+  "no_go": [
+    "auto_publish",
+    "auto_delete",
+    "causal_traffic_promises"
+  ],
+  "language": "observed / directional / decision-support"
+}
