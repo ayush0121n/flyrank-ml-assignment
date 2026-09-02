@@ -3,7 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact — Ayush Narkhede</title>
+  <title>Contact — Ayush Narkhede | AI/ML Engineer</title>
+  <meta name="description" content="Contact Ayush Narkhede — AI/ML engineer and FlyRank ML intern. Send a message; it reaches the inbox." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://ayush0121n.github.io/flyrank-ml-assignment/contact.html" />
+  <meta property="og:title" content="Contact — Ayush Narkhede" />
+  <meta property="og:description" content="Send a message to Ayush Narkhede. AI/ML engineer building applied search intelligence." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ayush0121n.github.io/flyrank-ml-assignment/contact.html" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Contact — Ayush Narkhede" />
+  <meta name="twitter:description" content="Send a message to Ayush Narkhede. AI/ML engineer." />
   <style>
     :root { --bg:#0f1115; --card:#181b22; --text:#e8eaed; --muted:#9aa0a6; --accent:#8ab4f8; --border:#2a2f3a; --ok:#81c995; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -68,7 +78,7 @@
     </div>
 
     <footer>
-      <a href="https://ayushdevxx.vercel.app/">← Back to portfolio</a>
+      <a href="./">← Back to portfolio</a>
       · Hosted free · Form backend via Web3Forms
     </footer>
   </div>
@@ -81,9 +91,28 @@
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       const key = form.querySelector('[name="access_key"]').value;
-      if (!key || key === "2e609fac-4eb2-49e9-9948-9eb6b837f981") {
+      if (!key || key === "YOUR_ACCESS_KEY_HERE") {
         msg.className = "msg err";
-        msg.textContent = "Form not activated yet — replace 2e609fac-4eb2-49e9-9948-9eb6b837f981 with your free Web3Forms key (see page source comment).";
+        msg.textContent = "Form not activated yet — missing Web3Forms access key.";
+        return;
+      }
+      // Client-side guards for empty / garbage (HTML5 required is primary; this is backup)
+      const name = (form.name.value || "").trim();
+      const email = (form.email.value || "").trim();
+      const message = (form.message.value || "").trim();
+      if (!name || !email || !message) {
+        msg.className = "msg err";
+        msg.textContent = "Please fill name, email, and message.";
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        msg.className = "msg err";
+        msg.textContent = "Please enter a valid email address.";
+        return;
+      }
+      if (message.length < 3) {
+        msg.className = "msg err";
+        msg.textContent = "Message is too short.";
         return;
       }
       btn.disabled = true;
@@ -102,13 +131,19 @@
           msg.className = "msg ok";
           msg.textContent = "Sent. Check your inbox — a real submission reached you.";
           form.reset();
+          btn.textContent = "Sent";
+          // Stay disabled briefly to block double-submit spam
+          setTimeout(() => {
+            btn.disabled = false;
+            btn.textContent = "Send message";
+          }, 2500);
+          return;
         } else {
           throw new Error(data.message || "Submit failed");
         }
       } catch (err) {
         msg.className = "msg err";
-        msg.textContent = "Could not send. Check the access key and try again.";
-      } finally {
+        msg.textContent = "Could not send. Check the network or try again in a moment.";
         btn.disabled = false;
         btn.textContent = "Send message";
       }
