@@ -60,7 +60,7 @@
 
   <h2>Abstract</h2>
   <p>
-    <strong>Question.</strong> Among pages that already attract search impressions, which ones under-capture clicks relative to peers, and can a model rank them for editorial review better than a simple rule?
+    <strong>Question.</strong> In large FlyRank-style content portfolios, among pages that already attract search impressions, which ones under-capture clicks relative to peers—and can a model rank them for editorial review better than a simple rule?
     <strong>Method.</strong> Using the FlyRank internship warehouse, we built a binary opportunity label from June 2026 GSC outcomes (high impressions, below-median CTR) and features from May 2026 performance plus static content attributes only—strictly sequential windows to avoid leakage.
     <strong>Validation.</strong> Models were evaluated with a client-level holdout so no test client appears in training; a rule baseline used the same split.
     <strong>Result.</strong> Gradient Boosting achieved ROC-AUC <span class="metric">0.781</span> versus a rule baseline of <span class="metric">0.577</span> (test base rate ≈ 22.6%).
@@ -69,10 +69,14 @@
 
   <h2>1. Introduction / Problem statement</h2>
   <p>
-    Editorial time is scarce. Many pages receive impressions but convert poorly to clicks. Ranking those pages for human review—title, meta, or content checks—is more useful than a global “optimize everything” list.
+    <strong>FlyRank content problem (case study).</strong>
+    Operators who manage large content portfolios face a familiar bottleneck: many URLs already earn search impressions, yet a subset systematically under-captures clicks relative to peers.
+    Without a ranked, evidence-backed queue, editorial time is spent either on gut feel or on full-site sweeps that do not scale.
   </p>
   <p>
-    This work supports that decision: given last month’s visible performance and static content signals, which pages should an editor open first this month? The answer is a ranked queue with explicit limits, not a promise that any rewrite will raise traffic.
+    This lane—CTR / Engagement Opportunity Scoring—treats that bottleneck as the research question.
+    Using public-safe monthly aggregates from the FlyRank internship warehouse, we rank visible pages that look like under-capture opportunities so a human can review title, meta, or body content first.
+    The output is decision-support for that review queue, not a claim that any single rewrite will raise traffic.
   </p>
 
   <h2>2. Data</h2>
