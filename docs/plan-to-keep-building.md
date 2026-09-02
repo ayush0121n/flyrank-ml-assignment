@@ -93,3 +93,7 @@ Body: Follow docs/plan-to-keep-building.md — three-beat card on index.html, co
 - [x] Build context preserved (same repo, voice, Claude/AI project, no rebuild)
 
 *Ayush Narkhede · General AI Fluency · The Plan to Keep Building*
+
+---
+Also indexed in [IMPACT_PROJECT.md](IMPACT_PROJECT.md) for the portal send-the-link card.
+
